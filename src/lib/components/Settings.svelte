@@ -50,6 +50,17 @@
 				/>
 			</div>
 
+			<div>
+				<label class="block text-sm text-zinc-400 mb-1" for="deepgram-key">Deepgram API Key</label>
+				<input
+					id="deepgram-key"
+					type="password"
+					bind:value={local.deepgram_api_key}
+					class="w-full bg-zinc-800 border border-zinc-600 rounded px-3 py-2 text-white text-sm"
+					placeholder="dg-..."
+				/>
+			</div>
+
 			<hr class="border-zinc-700" />
 
 			<div>

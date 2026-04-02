@@ -43,6 +43,7 @@ pub enum LlmProviderType {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct AppSettings {
     pub firecrawl_api_key: String,
+    pub deepgram_api_key: String,
     pub llm_provider: LlmProviderType,
     pub anthropic_api_key: String,
     pub openai_api_key: String,
@@ -55,6 +56,7 @@ impl Default for AppSettings {
     fn default() -> Self {
         Self {
             firecrawl_api_key: String::new(),
+            deepgram_api_key: String::new(),
             llm_provider: LlmProviderType::Anthropic,
             anthropic_api_key: String::new(),
             openai_api_key: String::new(),

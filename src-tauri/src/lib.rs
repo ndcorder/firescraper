@@ -1,7 +1,9 @@
 mod commands;
+mod deepgram;
 mod firecrawl;
 mod llm;
 mod types;
+mod youtube;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -11,6 +13,7 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .invoke_handler(tauri::generate_handler![
             commands::scrape_url_command,
+            commands::scrape_youtube_command,
             commands::check_is_youtube,
         ])
         .setup(|app| {

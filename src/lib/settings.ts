@@ -3,6 +3,7 @@ import { Store } from '@tauri-apps/plugin-store';
 
 export interface AppSettings {
 	firecrawl_api_key: string;
+	deepgram_api_key: string;
 	llm_provider: 'anthropic' | 'openai' | 'google' | 'openrouter';
 	anthropic_api_key: string;
 	openai_api_key: string;
@@ -20,6 +21,7 @@ const DEFAULT_PROMPT = `You are a content formatter. Take the following scraped 
 
 const defaults: AppSettings = {
 	firecrawl_api_key: '',
+	deepgram_api_key: '',
 	llm_provider: 'anthropic',
 	anthropic_api_key: '',
 	openai_api_key: '',

@@ -7,6 +7,7 @@
 	import OutputTabs from '$lib/components/OutputTabs.svelte';
 
 	let url = $state('');
+	let isYoutube = $state(false);
 	let formatWithLlm = $state(false);
 	let loading = $state(false);
 	let error = $state('');
@@ -20,11 +21,13 @@
 	async function handleUrlChange() {
 		if (url) {
 			try {
-				const isYt: boolean = await invoke('check_is_youtube', { url });
-				formatWithLlm = isYt;
+				isYoutube = await invoke('check_is_youtube', { url });
+				formatWithLlm = isYoutube;
 			} catch {
-				// ignore — command may not be ready yet
+				isYoutube = false;
 			}
+		} else {
+			isYoutube = false;
 		}
 	}
 
@@ -35,7 +38,8 @@
 		result = null;
 
 		try {
-			result = await invoke('scrape_url_command', {
+			const command = isYoutube ? 'scrape_youtube_command' : 'scrape_url_command';
+			result = await invoke(command, {
 				url: url.trim(),
 				formatWithLlm,
 				settings: get(settings)
@@ -114,7 +118,7 @@
 					class="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"
 				></div>
 				<span class="text-zinc-400 text-sm">
-					{formatWithLlm ? 'Scraping & formatting...' : 'Scraping...'}
+					{isYoutube ? 'Transcribing video...' : formatWithLlm ? 'Scraping & formatting...' : 'Scraping...'}
 				</span>
 			</div>
 		</div>
